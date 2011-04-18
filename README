@@ -1,0 +1,5 @@
+Simple tool for cropping given images with maximum non-zero regions
+
+Usage
+chmod +x smartcrop.py
+./smartcrop.py image1 image2 [image3]... 
