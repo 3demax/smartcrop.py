@@ -1,5 +1,8 @@
-Simple tool for cropping given images with maximum non-zero regions
+Simple tool for cropping given images with maximum common non-zero regions.
+Could be handy while creating sprites for game.
 
 Usage
 chmod +x smartcrop.py
-./smartcrop.py image1 image2 [image3]... 
+./smartcrop.py FILE FILE [FILE ...] [-d DIR]
+where DIR id destination directory of cropped files
+Be carefull of supplying at *least two images*

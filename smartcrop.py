@@ -2,39 +2,46 @@
 
 import sys
 import Image
+from optparse import OptionParser
+import os
+import shutil
 
-print(sys.argv)
+parser = OptionParser(usage="Usage: smartcrop.py FILE FILE [FILE ...] [-d DIR]")
+parser.add_option("-d", "--output-directory", dest="directory",
+				 help="move files to directory after cropping", metavar="DIR")
+(options, args) = parser.parse_args()
+print(options)
 
-if (len(sys.argv) < 3):
-	print("Usage: manipulate.py image_1.png ... image_n.png")
+if (len(args) < 2):
+	parser.print_help()
 	exit(1)
 
-tmp = Image.open(sys.argv[1])
+tmp = Image.open(args[0])
 
-for i in range(1,len(sys.argv)):
-	img = Image.open(sys.argv[i])
+for ifile in args:
+	img = Image.open(ifile)
 	tmp.paste(img, (0,0), img)
 
 
 common_bbox = tmp.getbbox()
-print(common_bbox)
+print("info: common bounding box is " + str(common_bbox))
 tmp.crop(common_bbox).show()
 
-for i in range(1,len(sys.argv)):
-	img = Image.open(sys.argv[i])
+if (options.directory == None ):
+	print ("warning: no output directory chosen.")
+	dirname = "."
+else:
+	dirname = options.directory+"("+str(common_bbox[0])+","+str(common_bbox[1])+")"
+if (not os.path.exists(dirname)):
+	os.mkdir(dirname)
+
+for ofile in args:
+	img = Image.open(ofile)
 	img = img.crop(common_bbox)
-	print (img.size)
-	print "Saving "+ sys.argv[i] +" ..."
-	img.save(sys.argv[i])
-	print "Done."
-#happy = Image.open("Magician_Scene_WOMAN_SHOWHEAD_HAPPY.png")
+	img.save(ofile)
+	print (os.path.basename(ofile))
+	shutil.move(ofile, dirname + "/" + os.path.basename(ofile))
+	print ( str(dirname) + "/" + str(ofile) + " saved.")
+exit(0)
 
-#happy.paste(leg, (0,0), leg)
 
-#happy.show()
-
-#happy.getbbox()
-
-#happy.crop(happy.getbbox()).show()
-
-#happy.save('out.png')
