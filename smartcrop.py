@@ -12,7 +12,7 @@ parser.add_option("-d", "--output-directory", dest="directory",
 (options, args) = parser.parse_args()
 print(options)
 
-if (len(args) < 2):
+if (len(args) < 1):
 	parser.print_help()
 	exit(1)
 
@@ -25,7 +25,7 @@ for ifile in args:
 
 common_bbox = tmp.getbbox()
 print("info: common bounding box is " + str(common_bbox))
-tmp.crop(common_bbox).show()
+#tmp.crop(common_bbox).show()
 
 if (options.directory == None ):
 	print ("warning: no output directory chosen.")

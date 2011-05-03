@@ -3,6 +3,5 @@ Could be handy while creating sprites for game.
 
 Usage
 chmod +x smartcrop.py
-./smartcrop.py FILE FILE [FILE ...] [-d DIR]
+./smartcrop.py FILE [FILE FILE ...] [-d DIR]
 where DIR id destination directory of cropped files
-Be carefull of supplying at *least two images*
