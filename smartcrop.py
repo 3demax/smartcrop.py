@@ -25,6 +25,7 @@ for ifile in args:
 
 common_bbox = tmp.getbbox()
 print("info: common bounding box is " + str(common_bbox))
+print("info: frame width " +str(common_bbox[2]-common_bbox[0]) + " height " + str(common_bbox[3]-common_bbox[1])) 
 #tmp.crop(common_bbox).show()
 
 if (options.directory == None ):
