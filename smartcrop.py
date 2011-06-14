@@ -32,9 +32,15 @@ if (options.directory == None ):
 	print ("warning: no output directory chosen.")
 	dirname = "."
 else:
-	dirname = options.directory+"("+str(common_bbox[0])+","+str(common_bbox[1])+")"
+	dirname = options.directory#+"("+str(common_bbox[0])+","+str(common_bbox[1])+")"
 if (not os.path.exists(dirname)):
 	os.mkdir(dirname)
+
+#create desciption file
+	info_file = open(dirname+'/'+'info.txt', 'w')
+	info_file.write("common bounding box is " + str(common_bbox)+'\n\n')
+	info_file.write("left: " + str(common_bbox[0]) + "px; top: " + str(common_bbox[1]) + "px;\n")
+	info_file.write("width: " + str(common_bbox[2]-common_bbox[0]) + "px; height: " + str(common_bbox[3]-common_bbox[1])+"px;\n")
 
 for ofile in args:
 	img = Image.open(ofile)
